@@ -13,11 +13,11 @@ func despair(ctx context.Context) {
 	for {
 		fmt.Println("Help me!")
 
-        select {
-        case <- innerCtx.Done():
-            fmt.Println("...")
-            return
-        }
+		select {
+		case <-innerCtx.Done():
+			fmt.Println("...")
+			return
+		}
 	}
 }
 

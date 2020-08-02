@@ -13,11 +13,11 @@ func despair(ctx context.Context) {
 	for {
 		fmt.Println("Help me!")
 
-        select {
-        case <- innerCtx.Done():
-            fmt.Println("...")
-            return
-        }
+		select {
+		case <-innerCtx.Done():
+			fmt.Println("...")
+			return
+		}
 	}
 }
 
@@ -27,13 +27,12 @@ func main() {
 
 	go despair(ctx)
 
-	time.Sleep(time.Second*1)
+	time.Sleep(time.Second * 1)
 	cancel()
-
 
 	select {
 	case <-ctx.Done():
 		fmt.Println(ctx.Err())
-		time.Sleep(time.Millisecond*100)
+		time.Sleep(time.Millisecond * 100)
 	}
 }
