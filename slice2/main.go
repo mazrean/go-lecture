@@ -10,9 +10,9 @@ func main() {
 	times := 5
 
 	start := time.Now()
-	for i := 0;i < num;i++ {
+	for i := 0; i < num; i++ {
 		s := []int{}
-		for j := 0;j < times;j++ {
+		for j := 0; j < times; j++ {
 			s = append(s, j)
 		}
 	}
@@ -20,9 +20,9 @@ func main() {
 	fmt.Println("no cap:", end.Sub(start).Milliseconds(), "ms")
 
 	start = time.Now()
-	for i := 0;i < num;i++ {
+	for i := 0; i < num; i++ {
 		s := make([]int, 0, times)
-		for j := 0;j < times;j++ {
+		for j := 0; j < times; j++ {
 			s = append(s, j)
 		}
 	}

@@ -5,9 +5,22 @@ import (
 	"fmt"
 )
 
+type ErrZeroDivide struct {
+	x int
+}
+
+func (e ErrZeroDivide) Error() string {
+	return fmt.Sprintf("zero dividing(x:%d)", e.x)
+}
+
+var zeroDivide ErrZeroDivide
+
 func div(x int, y int) (int, error) {
 	if y == 0 {
-		return 0, errors.New("zero div") //yが0のときにエラーを返す
+		zeroDivide = ErrZeroDivide{
+			x: x,
+		}
+		return 0, zeroDivide //yが0のときにエラーを返す
 	}
 
 	return x / y, nil //エラーがでなければnilを返す
@@ -30,6 +43,13 @@ func repeatDiv(num int, x int, y int) (int, error) {
 func main() {
 	result, err := repeatDiv(4, 5, 3)
 	if err != nil {
+		fmt.Println(errors.Is(err, zeroDivide))
+
+		z := &ErrZeroDivide{}
+		if errors.As(err, z) {
+			fmt.Println(z.x)
+		}
+
 		panic(err)
 	}
 
