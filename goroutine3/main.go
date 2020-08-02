@@ -12,8 +12,10 @@ func main() {
 		}(i)
 	}
 
-	for len(ch) < times { //chに値がたまりきるまで待つ
-		fmt.Println(len(ch))
+	for i := 0; i < times; i++ {
+		fmt.Printf("len:%d\n", len(ch))
+		val := <-ch
+		fmt.Printf("len: %d, val: %d\n", len(ch), val)
 	}
 
 	fmt.Print("end")
